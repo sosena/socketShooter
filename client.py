@@ -245,19 +245,9 @@ def handlePlayerDead(newPlayer):
     #send message to server so we know it quits
     bufferWindow = createBuffer(5, newPlayer.name, "Server", 0, "")
     s.send(bufferWindow)
+    print "Thanks for playing!"
+    sys.exit(0)
 
-    playAgain = raw_input("Would you like to play again? (y/n)")
-    playAgain = playAgain.lower()
-    print "playAgain is" + playAgain
-    if(playAgain == 'y'):
-        newPlayer = initializeUser(0 ,my_rtt)
-        printBoard()
-    elif playAgain == 'n':
-        print playAgain
-        print "Thanks for playing!"
-        sys.exit(0)
-    else:
-        print " "
 
 
 def transferMessage(resMessage, peerToSend):
@@ -686,8 +676,11 @@ while 1:
         elif sock == s:
             data = sock.recv(1054)
             if not data :
-                print '\nDisconnected from chat server'
-                sys.exit()
+                print '\nServer disconnected'
+                if sock in outputs:
+                    outputs.remove(sock)
+                inputs.remove(sock)
+                #sys.exit()
             else :
                 correct_data = partialReadBuffer + data
                 newMsg = getResponseMsg(correct_data)
