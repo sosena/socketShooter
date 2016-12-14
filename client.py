@@ -107,7 +107,7 @@ s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 try :
    s.connect(('comp112-01', listening_port))
 except :
-    print 'Unable to connect 2'
+    print 'Unable to connect'
     sys.exit()
 
 
@@ -172,7 +172,7 @@ def playersMove(player1, userInput):
             print("r is an invalid move because you cant move off the game board")
         else :
             bufferToSend = createBuffer(5, player1.name, "Server", 1, userInput)
-            print "sleeping for " + str(my_rtt)
+           # print "sleeping for " + str(my_rtt)
             time.sleep(float(my_rtt))
             s.send(bufferToSend)
             return
