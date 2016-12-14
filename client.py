@@ -515,7 +515,7 @@ def analyzeResponse(resMessage, socket_list):
             del list_of_clients[peerQuitting] 
     
     else:
-        print "Error in analyzeResponse"
+        print ""
 
 
     return newPlayer
